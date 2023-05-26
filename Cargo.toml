@@ -1,8 +1,8 @@
 [package]
-name = "funny-fizder"
+name = "piper"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+ncurses = "5.101.0"
+libc="0.2.144"
