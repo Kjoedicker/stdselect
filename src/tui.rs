@@ -46,13 +46,14 @@ pub fn display_selections(selections: &Vec<String>, highlighted_selection: i32) 
         .iter()
         .enumerate()
         .for_each(|(index, selection)| {
-            let formatted_string = format!("{}\n", selection);
-
+            
             if index as i32 == highlighted_selection {
+                let formatted_string = format!("> {}\n", selection);
                 attr_on(A_BOLD());
                 addstr(&formatted_string);
                 attr_off(A_BOLD());
             } else {
+                let formatted_string = format!("| {}\n", selection);
                 addstr(&formatted_string);
             }
         });
