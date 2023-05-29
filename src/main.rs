@@ -27,7 +27,7 @@ fn start() {
             KeyboardState::FinalSelection => {
                 tui::exit();
 
-                let selection_index = keyboard_handler.highlighted_selection.clone() as usize;
+                let selection_index = keyboard_handler.highlighted_selection as usize;
                 let final_selection = selections.get(selection_index).unwrap();
                 print!("{}", final_selection);
                 break;
@@ -35,11 +35,12 @@ fn start() {
             KeyboardState::Input => {
                 let highlighted_selection = keyboard_handler.highlighted_selection;
                 let total_selections = selections.len();
-                
+
                 tui::clear_screen();
                 tui::display_selections(&selections, highlighted_selection);
                 // TODO: revisit how we want to delimit
-                let delimiter = format!("{}/{}", highlighted_selection + 1, total_selections).to_owned(); 
+                let delimiter =
+                    format!("{}/{}", highlighted_selection + 1, total_selections).to_owned();
                 tui::display_input(&delimiter);
                 // TODO: add some sort of input matching that ties into the selection highlight
                 tui::display_input(&keyboard_handler.input_buffer);

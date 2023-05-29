@@ -19,16 +19,13 @@ fn enable_extended_keyboard() {
 fn open_tty() -> *mut libc::FILE {
     unsafe {
         let tty_filename = std::ffi::CString::new("/dev/tty").unwrap();
-        let tty = libc::fopen(tty_filename.as_ptr(), &('r' as libc::c_char));
-        tty
+
+        libc::fopen(tty_filename.as_ptr(), &('r' as libc::c_char))
     }
 }
 
 fn open_std_error() -> *mut libc::FILE {
-    unsafe {
-        let std_error = libc::fdopen(libc::STDERR_FILENO, &('w' as libc::c_char));
-        std_error
-    }
+    unsafe { libc::fdopen(libc::STDERR_FILENO, &('w' as libc::c_char)) }
 }
 
 fn lay_terminal_pipe() {
@@ -46,7 +43,6 @@ pub fn display_selections(selections: &Vec<String>, highlighted_selection: i32) 
         .iter()
         .enumerate()
         .for_each(|(index, selection)| {
-            
             if index as i32 == highlighted_selection {
                 let formatted_string = format!("> {}\n", selection);
                 attr_on(A_BOLD());
@@ -63,7 +59,7 @@ pub fn display_input(input: &String) {
     addstr(&format!("{}\n", &input));
 }
 
-pub fn exit () {
+pub fn exit() {
     endwin();
 }
 
